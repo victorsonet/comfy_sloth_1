@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import logo from "../assets/logo.svg";
 import { IoCart, IoPersonAddSharp } from "react-icons/io5";
@@ -6,22 +7,27 @@ import { IoCart, IoPersonAddSharp } from "react-icons/io5";
 function Navbar() {
   return (
     <Wrapper>
-      <div className="section-center">
-        <a href="/">
+      <div className="nav-container">
+        <Link to="/">
           <img src={logo} alt="Logo" className="logo" />
-        </a>
-        <div className="links">
-          <a href="/">Home</a>
-          <a href="/about">About</a>
-          <a href="/products">Products</a>
+        </Link>
+        <div className="nav_links">
+          <Link to="/">Home</Link>
+          <Link to="/about">About</Link>
+          <Link to="/products">Products</Link>
         </div>
-        <div className="icons">
-          <a href="/checkout">
-            Cart <IoCart />
-          </a>
-          <a href="">
-            Login <IoPersonAddSharp />
-          </a>
+        <div className="nav_icons">
+          <Link to="#" className="nav_icons_link">
+            Cart{" "}
+            <IoCart className="nav_icons_icon" style={{ fontSize: "1.5rem" }} />
+          </Link>
+          <Link to="#" className="nav_icons_link">
+            Login{" "}
+            <IoPersonAddSharp
+              className="nav_icons_icon"
+              style={{ fontSize: "1.3rem" }}
+            />
+          </Link>
         </div>
       </div>
     </Wrapper>
@@ -29,14 +35,13 @@ function Navbar() {
 }
 
 const Wrapper = styled.nav`
+  height: 5rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-width: 90%;
-  height: 10vh;
 
-  .section-center {
-    min-width: 90%;
+  .nav-container {
+    width: 90vw;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -46,14 +51,24 @@ const Wrapper = styled.nav`
     height: 2rem;
   }
 
-  .links {
+  .nav_links {
     display: flex;
     gap: 3rem;
   }
 
-  .icons {
+  .nav_icons {
     display: flex;
     gap: 2rem;
+
+    .nav_icons_link {
+      display: flex;
+      align-items: center;
+      font-size: 1.3rem;
+      gap: 0.3rem;
+    }
+
+    .nav_icons_icon {
+    }
   }
 `;
 

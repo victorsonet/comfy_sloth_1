@@ -3,12 +3,12 @@ import { Navbar } from "./components";
 
 function App() {
   return (
-    <div>
+    <main>
       <Navbar />
       <h2>Sidebar</h2>
       <Outlet />
       <h2>Footer</h2>
-    </div>
+    </main>
   );
 }
 
