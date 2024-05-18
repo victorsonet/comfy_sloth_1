@@ -1,20 +1,32 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import logo from "../assets/logo.svg";
 import { IoCart, IoPersonAddSharp } from "react-icons/io5";
+import { FaBars } from "react-icons/fa";
+import { links } from "../utils/constants";
 
 function Navbar() {
   return (
     <Wrapper>
       <div className="nav-container">
-        <Link to="/">
-          <img src={logo} alt="Logo" className="logo" />
-        </Link>
+        <div className="nav-header">
+          <Link to="/">
+            <img src={logo} alt="Logo" className="logo" />
+          </Link>
+          <button className="nav-toggle">
+            <FaBars />
+          </button>
+        </div>
         <div className="nav_links">
-          <Link to="/">Home</Link>
-          <Link to="/about">About</Link>
-          <Link to="/products">Products</Link>
+          <ul>
+            {links.map(({ id, text, url }) => {
+              return (
+                <li key={id}>
+                  <Link to={url}>{text}</Link>
+                </li>
+              );
+            })}
+          </ul>
         </div>
         <div className="nav_icons">
           <Link to="#" className="nav_icons_link">
@@ -51,9 +63,17 @@ const Wrapper = styled.nav`
     height: 2rem;
   }
 
+  .nav-toggle {
+    background: transparent;
+    border: transparent;
+    cursor: pointer;
+    svg {
+      font-size: 1.5rem;
+    }
+  }
+
   .nav_links {
-    display: flex;
-    gap: 3rem;
+    display: none;
   }
 
   .nav_icons {
@@ -68,6 +88,17 @@ const Wrapper = styled.nav`
     }
 
     .nav_icons_icon {
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+    .nav-toggle {
+      display: none;
+    }
+
+    .nav_links {
+      display: flex;
+      gap: 3rem;
     }
   }
 `;
