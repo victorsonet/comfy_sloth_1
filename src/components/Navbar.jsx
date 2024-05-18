@@ -2,43 +2,41 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import logo from "../assets/logo.svg";
 import { IoCart, IoPersonAddSharp } from "react-icons/io5";
-import { FaBars } from "react-icons/fa";
+import { FaBars, FaTimes } from "react-icons/fa";
 import { links } from "../utils/constants";
 
-function Navbar() {
+function Navbar({ isToggle, setIsToggle }) {
   return (
     <Wrapper>
-      <div className="nav-container">
-        <div className="nav-header">
-          <Link to="/">
-            <img src={logo} alt="Logo" className="logo" />
-          </Link>
-          <button className="nav-toggle">
-            <FaBars />
-          </button>
-        </div>
-        <div className="nav_links">
-          <ul>
-            {links.map(({ id, text, url }) => {
-              return (
-                <li key={id}>
-                  <Link to={url}>{text}</Link>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-        <div className="nav_icons">
-          <Link to="#" className="nav_icons_link">
-            Cart{" "}
-            <IoCart className="nav_icons_icon" style={{ fontSize: "1.5rem" }} />
-          </Link>
-          <Link to="#" className="nav_icons_link">
-            Login{" "}
-            <IoPersonAddSharp
-              className="nav_icons_icon"
-              style={{ fontSize: "1.3rem" }}
+      <div className="nav_container">
+        <Link>
+          <img src={logo} alt="Logo" className="logo" />
+        </Link>
+        <button className="nav_toggle">
+          {isToggle ? (
+            <FaTimes
+              onClick={() => setIsToggle((prev) => !prev)}
+              style={{ color: "var(--clr-red-dark)" }}
             />
+          ) : (
+            <FaBars onClick={() => setIsToggle((prev) => !prev)} />
+          )}
+        </button>
+        <div className="nav_links">
+          {links.map(({ id, text, url }) => {
+            return (
+              <Link key={id} to={url} className="nav_link">
+                {text}
+              </Link>
+            );
+          })}
+        </div>
+        <div className="nav_buttons">
+          <Link to="#" className="nav_button">
+            Cart <IoCart />
+          </Link>
+          <Link to="#" className="nav_button">
+            Login <IoPersonAddSharp />
           </Link>
         </div>
       </div>
@@ -52,7 +50,7 @@ const Wrapper = styled.nav`
   justify-content: center;
   align-items: center;
 
-  .nav-container {
+  .nav_container {
     width: 90vw;
     display: flex;
     justify-content: space-between;
@@ -63,7 +61,7 @@ const Wrapper = styled.nav`
     height: 2rem;
   }
 
-  .nav-toggle {
+  .nav_toggle {
     background: transparent;
     border: transparent;
     cursor: pointer;
@@ -76,29 +74,40 @@ const Wrapper = styled.nav`
     display: none;
   }
 
-  .nav_icons {
-    display: flex;
-    gap: 2rem;
-
-    .nav_icons_link {
-      display: flex;
-      align-items: center;
-      font-size: 1.3rem;
-      gap: 0.3rem;
-    }
-
-    .nav_icons_icon {
-    }
+  .nav_buttons {
+    display: none;
   }
 
   @media screen and (min-width: 768px) {
-    .nav-toggle {
+    .nav_toggle {
       display: none;
     }
 
     .nav_links {
       display: flex;
-      gap: 3rem;
+      gap: 1.5rem;
+      font-size: 1rem;
+      text-transform: capitalize;
+    }
+
+    .nav_link {
+      color: var(--clr-grey-1);
+      font-weight: 500;
+    }
+
+    .nav_buttons {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      font-size: 1.2rem;
+    }
+
+    .nav_button {
+      display: flex;
+      align-items: center;
+      gap: 0.2rem;
+      color: var(--clr-grey-1);
+      font-weight: 500;
     }
   }
 `;
