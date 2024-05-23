@@ -9,8 +9,13 @@ function Navbar({ isToggle, setIsToggle }) {
   return (
     <Wrapper>
       <div className="nav_container">
-        <Link>
-          <img src={logo} alt="Logo" className="logo" />
+        <Link to="/">
+          <img
+            src={logo}
+            alt="Logo"
+            className="logo"
+            onClick={() => setIsToggle(false)}
+          />
         </Link>
         <button className="nav_toggle">
           {isToggle ? (
@@ -25,17 +30,30 @@ function Navbar({ isToggle, setIsToggle }) {
         <div className="nav_links">
           {links.map(({ id, text, url }) => {
             return (
-              <Link key={id} to={url} className="nav_link">
+              <Link
+                key={id}
+                to={url}
+                className="nav_link"
+                onClick={() => setIsToggle((prev) => !prev)}
+              >
                 {text}
               </Link>
             );
           })}
         </div>
         <div className="nav_buttons">
-          <Link to="#" className="nav_button">
-            Cart <IoCart />
+          <Link
+            to="#"
+            className="nav_button"
+            onClick={() => setIsToggle((prev) => !prev)}
+          >
+            Cart <IoCart /> <span className="cart_value">6</span>
           </Link>
-          <Link to="#" className="nav_button">
+          <Link
+            to="#"
+            className="nav_button"
+            onClick={() => setIsToggle((prev) => !prev)}
+          >
             Login <IoPersonAddSharp />
           </Link>
         </div>
@@ -103,11 +121,28 @@ const Wrapper = styled.nav`
     }
 
     .nav_button {
+      position: relative;
       display: flex;
       align-items: center;
       gap: 0.2rem;
       color: var(--clr-grey-1);
       font-weight: 500;
+    }
+
+    .cart_value {
+      position: absolute;
+      top: -10px;
+      right: -16px;
+      background-color: var(--clr-primary-5);
+      width: 16px;
+      height: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      font-size: 0.75rem;
+      color: var(--clr-white);
+      padding: 10px;
     }
   }
 `;

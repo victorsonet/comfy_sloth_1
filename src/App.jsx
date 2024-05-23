@@ -10,7 +10,7 @@ function App() {
   return (
     <main>
       <Navbar isToggle={isToggle} setIsToggle={setIsToggle} />
-      {isToggle && <Sidebar />}
+      {isToggle && <Sidebar setIsToggle={setIsToggle} />}
       <Outlet />
       <h2>Footer</h2>
     </main>

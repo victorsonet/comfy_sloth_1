@@ -3,7 +3,7 @@ import { links } from "../utils/constants";
 import { IoCart, IoPersonAddSharp } from "react-icons/io5";
 import styled from "styled-components";
 
-function Sidebar() {
+function Sidebar({ setIsToggle }) {
   return (
     <Wrapper>
       <div className="sidebar_center">
@@ -11,17 +11,30 @@ function Sidebar() {
           <div className="nav_links">
             {links.map(({ id, text, url }) => {
               return (
-                <Link to={url} key={id} className="nav_link">
+                <Link
+                  to={url}
+                  key={id}
+                  className="nav_link"
+                  onClick={() => setIsToggle((prev) => !prev)}
+                >
                   {text}
                 </Link>
               );
             })}
           </div>
           <div className="nav_buttons">
-            <Link to="#" className="nav_button">
-              Cart <IoCart />
+            <Link
+              to="#"
+              className="nav_button"
+              onClick={() => setIsToggle((prev) => !prev)}
+            >
+              Cart <IoCart /> <span className="cart_value">6</span>
             </Link>
-            <Link to="#" className="nav_button">
+            <Link
+              to="#"
+              className="nav_button"
+              onClick={() => setIsToggle((prev) => !prev)}
+            >
               Login <IoPersonAddSharp />
             </Link>
           </div>
@@ -72,6 +85,27 @@ const Wrapper = styled.aside`
     gap: 0.2rem;
     color: var(--clr-grey-1);
     font-weight: 500;
+    position: relative;
+  }
+
+  .cart_value {
+    position: absolute;
+    top: -10px;
+    right: -16px;
+    background-color: var(--clr-primary-5);
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 0.75rem;
+    color: var(--clr-white);
+    padding: 10px;
+  }
+
+  @media screen and (min-width: 768px) {
+    display: none;
   }
 `;
 
